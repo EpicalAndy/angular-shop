@@ -10,7 +10,11 @@ import { Component, OnInit } from '@angular/core';
      <option value="2">Two</option>'
    </select>
    <br>
-   <app-button></app-button>`
+   <app-button color="primary"
+   size="default"
+    [isActive]="false"
+     [isDisabled]="false">
+     </app-button>`
 })
 export class DropdownComponent implements OnInit {
 
