@@ -1,14 +1,55 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+
+import { constants } from './constants';
 
 @Component({
   selector: 'app-button',
-  template: '<button>button</button>'
+  template: `<button class="button"
+  [class.active]="isButtonActive"
+  (click)="buttonClick()"
+  [style.background]="buttonColor"
+  [style.width]="buttonSize"
+   [attr.disabled]="isButtonDisabled">
+      <span>button</span>
+    </button>`,
+  styleUrls: ['button.component.scss']
 })
 export class ButtonComponent implements OnInit {
+  buttonColor: string;
+  buttonSize: string;
+  isButtonDisabled: string | null;
+  isButtonActive: boolean
 
-  constructor() { }
-
-  ngOnInit(): void {
+  @Input() set color(color: string) {
+    this.buttonColor = constants?.color[color];
+  }
+  @Input() set size(size: string) {
+    this.buttonSize = constants['size'][size];
+  }
+  @Input() set isActive(isActive: boolean) {
+    this.isButtonActive = isActive || false;
+  }
+  @Input() set isDisabled(isDisabled: boolean) {
+    this.isButtonDisabled = isDisabled ? '' : null;
   }
 
+  constructor() {
+    this.isButtonDisabled = null;
+    this.isButtonActive = false
+
+    this.buttonColor = 'white';
+    this.buttonSize = 'auto';
+  }
+
+  ngOnInit(): void {
+
+  }
+
+  public buttonHover() {
+    this.isButtonActive && true;
+  }
+
+  public buttonClick() {
+    alert('isActive!');
+  }
 }
