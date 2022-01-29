@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { DropdownComponent } from './dropdown.component';
 import { ButtonModule } from '../button/button.module';
+import { MenuModule } from '../menu/menu.module';
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import { ButtonModule } from '../button/button.module';
   ],
   imports: [
     CommonModule,
-    ButtonModule
+    ButtonModule,
+    MenuModule
   ],
   exports: [DropdownComponent]
 })

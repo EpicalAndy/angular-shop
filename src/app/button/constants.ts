@@ -1,8 +1,8 @@
 export const constants: constantsType = {
   size: {
-    default: {width: 'auto'},
-    small: {width: 'auto'},
-    large: {widht: '100%'}
+    default: 'auto',
+    small:  'auto',
+    large:  '50%'
   },
   color: {
     default: 'gray',

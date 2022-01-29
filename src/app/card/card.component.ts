@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
   selector: 'app-card',
   template: `<app-button
   color="default"
-   size="default"
+   size="large"
    [isActive]="true"
    [isDisabled]="true">
    </app-button>
@@ -15,7 +15,7 @@ export class CardComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    
+
   }
 
 }

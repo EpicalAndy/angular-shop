@@ -1,26 +1,45 @@
-import { Component, OnInit } from '@angular/core';
-
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-dropdown',
   template:`
-  <label for="homework">Dropdown </label>
-   <select name="homework" id="homework">
-     <option value="1">One</option>'
-     <option value="2">Two</option>'
-   </select>
-   <br>
+
    <app-button color="primary"
+   (click)="onClick()"
+   (mouseenter)="onmouseenter()"
+   (mouseleave)="onMouseLeave()"
    size="default"
     [isActive]="false"
      [isDisabled]="false">
-     </app-button>`
+     </app-button>
+     <app-menu [style.display]="isOpen ? '' : 'none'"></app-menu>
+     `
 })
+
 export class DropdownComponent implements OnInit {
+  @Input() trigger: string = 'hover';
+
+  isOpen = true;
 
   constructor() { }
 
   ngOnInit(): void {
+    this.onMouseLeave();
   }
 
+  public onmouseenter() {
+    this.trigger === 'hover' && this.toggleMenu(true);
+  }
+
+  public onMouseLeave() {
+    this.trigger === 'hover' && this.toggleMenu(false);
+  }
+
+  public onClick() {
+    this.trigger === 'click' && this.toggleMenu();
+  }
+
+  private toggleMenu(state?: boolean) {
+    this.isOpen = state ? this.isOpen = state : !this.isOpen;
+  }
 }

@@ -4,9 +4,11 @@ import { constants } from './constants';
 
 @Component({
   selector: 'app-button',
-  template: `<button class="button" [ngClass]="{active: isButtonActive}"
+  template: `<button class="button"
+  [class.active]="isButtonActive"
   (click)="buttonClick()"
   [style.background]="buttonColor"
+  [style.width]="buttonSize"
    [attr.disabled]="isButtonDisabled">
       <span>button</span>
     </button>`,
@@ -36,14 +38,18 @@ export class ButtonComponent implements OnInit {
     this.isButtonActive = false
 
     this.buttonColor = 'white';
-    this.buttonSize = 'default';
+    this.buttonSize = 'auto';
   }
 
   ngOnInit(): void {
 
   }
 
+  public buttonHover() {
+    this.isButtonActive && true;
+  }
+
   public buttonClick() {
-    alert('Work!');
+    alert('isActive!');
   }
 }
