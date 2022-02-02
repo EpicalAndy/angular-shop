@@ -1,10 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-icon',
-  template: '<span>&#10084;</span>'
+  template: `<div [style.background]="'url(' + img + ')'"></div>`,
+  styleUrls: ['icon.component.scss']
 })
 export class IconComponent implements OnInit {
+
+  @Input() img = '/assets/cart.png';
+
 
   constructor() { }
 

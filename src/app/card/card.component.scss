@@ -1,0 +1,31 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  border: solid 1px gray;
+  padding: 1em;
+  margin: 5px;
+  border-radius: 10px;
+  text-align: center;
+ }
+
+ h2 {
+   display: inline-block;
+   padding: 1em;
+   opacity: 0.5;
+ }
+
+ .card>div {
+   display: flex;
+   width: 100%;
+   overflow: hidden;
+   flex-direction: column;
+ }
+
+ .card>div>span {
+   min-width: 50%;
+ }
+
+
+li {
+  list-style-type: none;
+}

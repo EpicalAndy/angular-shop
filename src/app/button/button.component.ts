@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, EventEmitter, OnInit, Output, SimpleChanges } from '@angular/core';
 
 import { constants } from './constants';
 
@@ -6,11 +6,11 @@ import { constants } from './constants';
   selector: 'app-button',
   template: `<button class="button"
   [class.active]="isButtonActive"
-  (click)="buttonClick()"
+  (click)="buttonAction()"
   [style.background]="buttonColor"
   [style.width]="buttonSize"
    [attr.disabled]="isButtonDisabled">
-      <span>button</span>
+      <span>{{ name }}</span>
     </button>`,
   styleUrls: ['button.component.scss']
 })
@@ -32,6 +32,10 @@ export class ButtonComponent implements OnInit {
   @Input() set isDisabled(isDisabled: boolean) {
     this.isButtonDisabled = isDisabled ? '' : null;
   }
+  @Input() name = 'Button';
+  @Input() action = function() {};
+
+  @Output() clicked = new EventEmitter();
 
   constructor() {
     this.isButtonDisabled = null;
@@ -45,11 +49,19 @@ export class ButtonComponent implements OnInit {
 
   }
 
+  private buttonClicked = false;
+
   public buttonHover() {
     this.isButtonActive && true;
   }
 
   public buttonClick() {
     alert('isActive!');
+  }
+
+  public buttonAction() {
+    this.buttonClicked = !this.buttonClicked;
+
+    this.clicked.emit(this.buttonClicked);
   }
 }

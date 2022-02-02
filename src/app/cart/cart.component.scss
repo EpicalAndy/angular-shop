@@ -1,0 +1,19 @@
+.container {
+  position: relative;
+}
+
+.counter {
+  position: absolute;
+  border: solid 1px transparent;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  top: -10px;
+  right: -10px;
+  background-color: green;
+  text-align: center;
+  font-size: 0.8em;
+  line-height: 1.5em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
