@@ -91,7 +91,7 @@ export class CatalogComponent implements OnInit {
         default:
           visible = 'block';
       }
-      debugger
+      
       return visible;
   }
 }
