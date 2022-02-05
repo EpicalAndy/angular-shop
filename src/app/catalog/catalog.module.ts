@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 
 import { CartModule } from '../cart/cart.module';
 import { CatalogComponent } from './catalog.component';
+import { ToggleModule } from '../toggle/toggle.module';
 
 
 
@@ -14,8 +15,10 @@ import { CatalogComponent } from './catalog.component';
   imports: [
     CommonModule,
     CardModule,
-    CartModule
+    CartModule,
+    ToggleModule
   ],
   exports: [ CatalogComponent ]
 })
+
 export class CatalogModule { }

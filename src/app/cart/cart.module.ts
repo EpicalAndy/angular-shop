@@ -17,4 +17,5 @@ import { CartComponent } from './cart.component';
     CartComponent
   ]
 })
+
 export class CartModule { }

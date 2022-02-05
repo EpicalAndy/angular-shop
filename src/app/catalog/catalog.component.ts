@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { products } from '../products.data'
 import { CartModule } from '../cart/cart.module';
 
+import { toggle } from '../toggle/model';
+
 
 @Component({
   selector: 'app-catalog',
@@ -12,10 +14,18 @@ import { CartModule } from '../cart/cart.module';
 export class CatalogComponent implements OnInit {
   products: any[] = [];
   inCart: any[] = [];
+  buttonPresed: string | undefined;
   productsInCart: any[] = [];
+  toggles: toggle[] | undefined;
 
   constructor() {
     this.products = products;
+    this.toggles = [
+      {label: 'Показать все', value: 'all', isActive: true},
+      {label: 'Со скидкой', value: 'discount', isActive: false},
+      {label: 'В наличии', value: 'inStock', isActive: false},
+      {label: 'Пустышка', value: '', isActive: false}
+    ]
    }
 
   ngOnInit(): void {
@@ -57,5 +67,31 @@ export class CatalogComponent implements OnInit {
     }
 
     return undefined;
+  }
+
+  public presedFilterButton(buttonValue: any) {
+    this.buttonPresed = buttonValue;
+
+    this.toggles?.forEach(toogle => {
+      toogle.value === buttonValue && (toogle.isActive = true);
+      toogle.value !== buttonValue && (toogle.isActive = false);
+    });
+  }
+
+  public isVisible(elm: any) {
+    let visible;
+
+      switch (this.buttonPresed) {
+        case 'discount':
+          visible = elm?.discount === true ? 'block' : 'none';
+          break;
+        case 'inStock':
+          visible = elm?.count > 0 ? 'block' : 'none';
+          break
+        default:
+          visible = 'block';
+      }
+      debugger
+      return visible;
   }
 }

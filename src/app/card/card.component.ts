@@ -18,10 +18,10 @@ import { ButtonModule } from '../button/button.module';
       <span>Price: </span><span>{{ product.price | currency:'RUB' }}</span>
       </li>
       <li>
-      <span>Added: </span><span>{{ product.addedDate | date: 'full' }}</span>
+      <span>Discount: </span><span>{{ product.discount }}</span>
       </li>
     </ul>
-    <app-button name="Добавить" (clicked)="onChanged($event)"></app-button>
+    <app-button label="Добавить" (clicked)="onChanged($event)"></app-button>
   </div>
   `,
   styleUrls: ['./card.component.scss']

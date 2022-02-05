@@ -10,7 +10,7 @@ import { constants } from './constants';
   [style.background]="buttonColor"
   [style.width]="buttonSize"
    [attr.disabled]="isButtonDisabled">
-      <span>{{ name }}</span>
+      <span>{{ label }}</span>
     </button>`,
   styleUrls: ['button.component.scss']
 })
@@ -32,8 +32,8 @@ export class ButtonComponent implements OnInit {
   @Input() set isDisabled(isDisabled: boolean) {
     this.isButtonDisabled = isDisabled ? '' : null;
   }
-  @Input() name = 'Button';
-  @Input() action = function() {};
+  @Input() label = 'Button';
+  @Input() actionName: any;
 
   @Output() clicked = new EventEmitter();
 
@@ -62,6 +62,7 @@ export class ButtonComponent implements OnInit {
   public buttonAction() {
     this.buttonClicked = !this.buttonClicked;
 
+    return this.actionName ? this.clicked.emit(this.actionName) :
     this.clicked.emit(this.buttonClicked);
   }
 }

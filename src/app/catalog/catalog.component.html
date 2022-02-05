@@ -6,9 +6,14 @@
 <h2>Catalog</h2>
 
 <div class="catalog">
-  <app-card *ngFor="let item of products"
+  <app-card
+  class="item"
+  [style.display]="isVisible(item)"
+  *ngFor="let item of products"
   (addToCart)='addToCart($event, item)'
-  [product]="item"
-  ></app-card>
+  [product]="item">
+  </app-card>
 </div>
+
+<app-toggle [toogless]="toggles" (toogleStatus)="presedFilterButton($event)"></app-toggle>
 
