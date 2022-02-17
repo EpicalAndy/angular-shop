@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
 import { products } from '../products.data'
-import { CartModule } from '../cart/cart.module';
 
 import { toggle } from '../toggle/model';
 
@@ -31,8 +30,14 @@ export class CatalogComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  public isShowCartContent: boolean = false;
+
   public addCatalogToCart(event: any, item: any) {
     this.productsInCart.push(event);
+  }
+
+  public showCartContent() {
+    this.isShowCartContent = this.inCart.length > 0;
   }
 
   public addToCart(isAddedToCart: any, item: any) {
@@ -91,7 +96,7 @@ export class CatalogComponent implements OnInit {
         default:
           visible = 'block';
       }
-      
+
       return visible;
   }
 }

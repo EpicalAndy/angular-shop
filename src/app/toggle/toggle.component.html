@@ -1,0 +1,10 @@
+<div class="toggles">
+  <div class="toggle" *ngFor="let item of toogless">
+    <app-button *ngIf="item.value"
+      [label]="item.label"
+      [isActive]="item.isActive"
+      [actionName]="item.value"
+      (clicked)="buttonPresed($event, item)">
+    </app-button>
+  </div>
+</div>

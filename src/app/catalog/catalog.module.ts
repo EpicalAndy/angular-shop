@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { CartModule } from '../cart/cart.module';
 import { CatalogComponent } from './catalog.component';
 import { ToggleModule } from '../toggle/toggle.module';
+import { CartContentModule } from '../cart-content/cart-content.module';
 
 
 
@@ -16,6 +17,7 @@ import { ToggleModule } from '../toggle/toggle.module';
     CommonModule,
     CardModule,
     CartModule,
+    CartContentModule,
     ToggleModule
   ],
   exports: [ CatalogComponent ]

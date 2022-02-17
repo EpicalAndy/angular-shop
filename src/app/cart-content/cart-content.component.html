@@ -1,0 +1,16 @@
+
+<div class="cart-content">
+  <header>
+    <app-button class="close-button" [label]="'Закрыть'"></app-button>
+  </header>
+
+  <div class="products">
+    <app-card
+    class="item"
+    *ngFor="let item of products"
+    [product]="item">
+    </app-card>
+  </div>
+
+
+</div>

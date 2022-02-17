@@ -1,0 +1,36 @@
+.cart-content {
+  position: absolute;
+  left: 20%;
+  right: 20%;
+  top: 25%;
+  bottom: 10%;
+  display: block;
+  z-index: 1;
+  background-color: beige;
+  border: solid 1px black;
+  border-radius: 10px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+header {
+  display: flex;
+  justify-content: end;
+  padding: 5px;
+}
+
+.products {
+  display: flex;
+  flex-direction: row;
+  padding: 0px;
+  margin: 0;
+  flex-wrap: wrap;
+}
+
+.item {
+  width: 50%;
+}
+
+.close-button {
+  text-align: end;
+}
