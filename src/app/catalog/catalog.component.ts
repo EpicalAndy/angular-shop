@@ -37,7 +37,7 @@ export class CatalogComponent implements OnInit {
   }
 
   public showCartContent() {
-    this.isShowCartContent = this.inCart.length > 0;
+    this.isShowCartContent = this.inCart.length > 0 && !this.isShowCartContent;
   }
 
   public addToCart(isAddedToCart: any, item: any) {

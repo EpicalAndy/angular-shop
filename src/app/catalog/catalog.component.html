@@ -15,7 +15,7 @@
   </app-card>
 </div>
 
-<app-cart-content *ngIf="isShowCartContent" [products]="inCart"></app-cart-content>
+<app-cart-content *ngIf="isShowCartContent" (close)="showCartContent()" [products]="inCart"></app-cart-content>
 
 <app-toggle [toogless]="toggles" (toogleStatus)="presedFilterButton($event)"></app-toggle>
 

@@ -1,7 +1,11 @@
 
 <div class="cart-content">
   <header>
-    <app-button class="close-button" [label]="'Закрыть'"></app-button>
+    <span class="cart-sum">сумма: {{ curentSumm | currency: 'RUR' }}</span>
+    <app-button class="close-button"
+      (clicked)="closeCart()"
+      [label]="'X'">
+    </app-button>
   </header>
 
   <div class="products">
