@@ -32,6 +32,8 @@ export class CatalogComponent implements OnInit {
 
   public isShowCartContent: boolean = false;
 
+  public showButtons = {add: false, remove: true};
+
   public addCatalogToCart(event: any, item: any) {
     this.productsInCart.push(event);
   }
@@ -45,17 +47,6 @@ export class CatalogComponent implements OnInit {
 
     index !== undefined && (this.inCart[index]['count'] += 1);
     index === undefined && this.inCart.push({count: 0, product: item});
-    /*
-    if (isAddedToCart) {
-      this.productsInCart.push(item);
-
-      return;
-    }
-
-    index = this.getProductCartIndex(item);
-
-    index !== undefined && this.productsInCart.splice(index, 1);
-    */
   }
 
   private getProductCartIndex(product: any) {

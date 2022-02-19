@@ -4,7 +4,9 @@
   right: 20%;
   top: 25%;
   bottom: 10%;
-  display: block;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   z-index: 1;
   background-color: beige;
   border: solid 1px black;
@@ -38,3 +40,16 @@ header {
 .cart-sum {
   padding: 10px;
 }
+
+
+footer {
+  position: unset;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  bottom: 5px;
+}
+
+footer .buttons {
+
+ }

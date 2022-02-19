@@ -15,13 +15,20 @@ import { ButtonModule } from '../button/button.module';
       <span>Count: </span><span>{{ product.count }}</span>
       </li>
       <li>
-      <span>Price: </span><span>{{ product.price | currency:'RUB' }}</span>
+      <span>Price: </span><span>{{ product.price | currency:'RUR' }}</span>
       </li>
       <li>
       <span>Discount: </span><span>{{ product.discount }}</span>
       </li>
     </ul>
-    <app-button label="Добавить" (clicked)="onChanged($event)"></app-button>
+    <app-button [label]="'Добавить'"
+      *ngIf="showAddButton"
+      (clicked)="addProduct($event)">
+    </app-button>
+    <app-button [label]="'X'"
+      *ngIf="showRemoveButton"
+      (clicked)="removeProduct(product)">
+    </app-button>
   </div>
   `,
   styleUrls: ['./card.component.scss']
@@ -29,19 +36,31 @@ import { ButtonModule } from '../button/button.module';
 
 export class CardComponent implements OnInit {
   @Input() product: any
+  @Input() showButtons = {add: false, remove: false};
 
   @Output() addToCart = new EventEmitter();
+  @Output() removeFromCart = new EventEmitter();
 
   constructor() { }
 
   private isAddedToCart = false;
 
   ngOnInit(): void {
-
   }
 
+  public get showAddButton() {
+    return this.showButtons.add;
+  }
 
-  public onChanged(data:any) {
-    this.addToCart.emit(data);
+  public get showRemoveButton() {
+    return this.showButtons.remove;
+  }
+
+  public addProduct(product:any) {
+    this.addToCart.emit(product);
+  }
+
+  public removeProduct(product:any) {
+    this.removeFromCart.emit(product)
   }
 }
