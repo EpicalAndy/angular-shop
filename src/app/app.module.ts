@@ -1,6 +1,8 @@
 import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { registerLocaleData } from '@angular/common';
+import { AppRoutingModule } from './app-routing.module';
+import { RouterModule } from '@angular/router'
 import localeRu from '@angular/common/locales/ru';
 
 import { AppComponent } from './app.component';
@@ -13,14 +15,16 @@ registerLocaleData(localeRu, 'ru');
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
+    AppRoutingModule,
     DropdownModule,
     CardModule,
     IconTooltipModule,
-    CatalogModule
+    CatalogModule,
+    RouterModule
   ],
   providers: [{provide: LOCALE_ID, useValue: 'ru'}],
   bootstrap: [AppComponent]
