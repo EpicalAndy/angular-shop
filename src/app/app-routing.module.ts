@@ -10,12 +10,12 @@ export const routes: Routes = [
     component: CatalogComponent
   },
   {
-    path: 'not-found',
+    path: '404',
     component: NoteFoundComponent
   },
   {
     path: '**',
-    redirectTo: 'not-found'
+    redirectTo: '404'
   }
 ]
 
