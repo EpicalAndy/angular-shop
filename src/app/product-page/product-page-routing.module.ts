@@ -3,12 +3,11 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router'
 import { ProductPageComponent } from '../product-page/product-page.component'
 import { NoteFoundComponent } from "../note-found/note-found.component";
-import { CatalogComponent } from "./catalog.component";
 
 export const routes: Routes = [
   {
     path: '',
-    component: CatalogComponent
+    component: ProductPageComponent
   },
   {
     path: ':id',
@@ -32,4 +31,4 @@ export const routes: Routes = [
   exports: [RouterModule]
 })
 
-export class CatalogRoutingModule { }
+export class ProductPageRoutingModule { }

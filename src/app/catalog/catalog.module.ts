@@ -1,4 +1,4 @@
-import { CardModule } from './../card/card.module';
+import { CardModule } from '../card/card.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -6,7 +6,7 @@ import { CartModule } from '../cart/cart.module';
 import { CatalogComponent } from './catalog.component';
 import { ToggleModule } from '../toggle/toggle.module';
 import { CartContentModule } from '../cart-content/cart-content.module';
-
+import { CatalogRoutingModule } from './catalog-routing.module'
 
 
 @NgModule({
@@ -18,6 +18,7 @@ import { CartContentModule } from '../cart-content/cart-content.module';
     CardModule,
     CartModule,
     CartContentModule,
+    CatalogRoutingModule,
     ToggleModule
   ],
   exports: [ CatalogComponent ]

@@ -7,11 +7,23 @@ import { NoteFoundComponent } from "./note-found/note-found.component";
 export const routes: Routes = [
   {
     path: '',
-    component: CatalogComponent
+    // component: CatalogComponent
+    redirectTo: 'catalog',
+    pathMatch: 'full'
+    // loadChildren: () => import('./catalog/catalog.module').then(m => m.CatalogModule)
   },
   {
     path: '404',
     component: NoteFoundComponent
+  },
+  {// component: CatalogComponent
+    path: 'catalog',
+    loadChildren: () => import('./catalog/catalog.module').then(m => m.CatalogModule)
+  },
+  {
+    path: 'product',
+    // component: ProductPageComponent
+    loadChildren: () => import('./product-page/product-page.module').then(m => m.ProductPageModule)
   },
   {
     path: '**',
