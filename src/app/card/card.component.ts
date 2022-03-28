@@ -1,12 +1,14 @@
 import { Component, Input, OnInit, Output, EventEmitter, OnChanges } from '@angular/core';
 
 import { ButtonModule } from '../button/button.module';
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-card',
   template: `
   <div class="card">
     <h2>Product Card</h2>
+    <p>{{ productId }}</p>
     <ul>
       <li>
       <span>Name: </span><span>{{ product.name }}</span>
@@ -41,7 +43,11 @@ export class CardComponent implements OnInit {
   @Output() addToCart = new EventEmitter();
   @Output() removeFromCart = new EventEmitter();
 
-  constructor() { }
+  public productId: string
+
+  constructor(private route:ActivatedRoute) {
+    this.productId = this.route.snapshot.params['id']
+  }
 
   private isAddedToCart = false;
 
