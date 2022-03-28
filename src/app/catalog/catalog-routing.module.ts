@@ -8,13 +8,11 @@ import { CatalogComponent } from "./catalog.component";
 export const routes: Routes = [
   {
     path: '',
-    // component: CatalogComponent
-    loadChildren: () => import('../catalog/catalog.module').then(m => m.CatalogModule)
+    component: CatalogComponent
   },
   {
     path: ':id',
-    // component: ProductPageComponent
-    loadChildren: () => import('../product-page/product-page.module').then(m => m.ProductPageModule)
+    component: ProductPageComponent
   },
   {
     path: '404',
@@ -29,8 +27,9 @@ export const routes: Routes = [
 @NgModule({
   declarations: [],
   imports: [
-    CommonModule, RouterModule.forRoot(routes)
-  ]
+    CommonModule, RouterModule.forChild(routes)
+  ],
+  exports: [RouterModule]
 })
 
-export class AppRoutingModule { }
+export class CatalogRoutingModule { }
