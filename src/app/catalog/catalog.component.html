@@ -1,4 +1,3 @@
-
 <div class="header">
   <app-cart [cart]="inCart" (click)="showCartContent()"></app-cart>
 </div>
@@ -7,18 +6,19 @@
 
 <div class="catalog">
   <app-card
-  class="item"
-  [style.display]="isVisible(item)"
-  *ngFor="let item of products"
-  (addToCart)='addToCart($event, item)'
-  [product]="item"
-  [showButtons]="{add: true, remove: false}">
+    [routerLink]="['/product', item['id']]"
+    class="item"
+    [style.display]="isVisible(item)"
+    *ngFor="let item of products"
+    (addToCart)='addToCart($event, item)'
+    [product]="item"
+    [showButtons]="{add: true, remove: false}">
   </app-card>
 </div>
 
 <app-cart-content *ngIf="isShowCartContent"
-  (close)="showCartContent()"
-  [products]="inCart">
+                  (close)="showCartContent()"
+                  [products]="inCart">
 </app-cart-content>
 
 <app-toggle [toogless]="toggles" (toogleStatus)="presedFilterButton($event)"></app-toggle>
