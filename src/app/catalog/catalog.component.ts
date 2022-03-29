@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import { Router } from "@angular/router";
 
 import {products} from '../products.data'
 
@@ -17,7 +18,7 @@ export class CatalogComponent implements OnInit {
   productsInCart: any[] = [];
   toggles: toggle[] | undefined;
 
-  constructor() {
+  constructor(private router: Router) {
     this.products = products;
     this.toggles = [
       {label: 'Показать все', value: 'all', isActive: true},
@@ -28,6 +29,7 @@ export class CatalogComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.setQueryParams();
   }
 
   public isShowCartContent: boolean = false;
@@ -65,13 +67,27 @@ export class CatalogComponent implements OnInit {
     return undefined;
   }
 
-  public presedFilterButton(buttonValue: any) {
+   private setQueryParams() {
+    const toggles = this.toggles;
+    const params = {};
+
+    toggles?.forEach(toggle => {
+      // @ts-ignore
+      toggle.value && (params[toggle.value] = toggle.isActive);
+    });
+
+    this.router.navigate(['/catalog'], {queryParams: params});
+  }
+
+  public pressedFilterButton(buttonValue: any) {
     this.buttonPressed = buttonValue;
 
     this.toggles?.forEach(toogle => {
       toogle.value === buttonValue && (toogle.isActive = true);
       toogle.value !== buttonValue && (toogle.isActive = false);
     });
+
+    this.setQueryParams();
   }
 
   public isVisible(elm: any) {
