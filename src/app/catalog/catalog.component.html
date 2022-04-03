@@ -9,7 +9,6 @@
     class="item"
     *ngFor="let item of products"
     [style.display]="isVisible(item)"
-    [routerLink]="['/product', item['id']]"
     (addToCart)='addToCart($event, item)'
     [product]="item"
     [showButtons]="{add: true, remove: false}">

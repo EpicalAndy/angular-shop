@@ -7,7 +7,9 @@ import {ActivatedRoute} from "@angular/router";
   selector: 'app-card',
   template: `
   <div class="card">
-    <h2>Product Card</h2>
+    <a [routerLink]="['/product', product.id]">
+      <h2>Product Card</h2>
+    </a>
     <p>{{ productId }}</p>
     <ul>
       <li>
