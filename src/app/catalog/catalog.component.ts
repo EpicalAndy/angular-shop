@@ -1,15 +1,15 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 
-import {products} from '../products.data'
+import { products } from '../products.data'
 
-import {toggle} from '../toggle/model';
+import { toggle } from '../toggle/model';
 
 
 @Component({
   selector: 'app-catalog',
   templateUrl: './catalog.component.html',
-  styleUrls: ['./catalog.component.scss']
+  styleUrls: [ './catalog.component.scss' ]
 })
 export class CatalogComponent implements OnInit {
   products: any[] = [];
@@ -21,10 +21,10 @@ export class CatalogComponent implements OnInit {
   constructor(private router: Router) {
     this.products = products;
     this.toggles = [
-      {label: 'Показать все', value: 'all', isActive: true},
-      {label: 'Со скидкой', value: 'discount', isActive: false},
-      {label: 'В наличии', value: 'inStock', isActive: false},
-      {label: 'Пустышка', value: '', isActive: false}
+      { label: 'Показать все', value: 'all', isActive: true },
+      { label: 'Со скидкой', value: 'discount', isActive: false },
+      { label: 'В наличии', value: 'inStock', isActive: false },
+      { label: 'Пустышка', value: '', isActive: false }
     ]
   }
 
@@ -34,11 +34,7 @@ export class CatalogComponent implements OnInit {
 
   public isShowCartContent: boolean = false;
 
-  public showButtons = {add: false, remove: true};
-
-  public addCatalogToCart(event: any, item: any) {
-    this.productsInCart.push(event);
-  }
+  public showButtons = { add: false, remove: true };
 
   public showCartContent() {
     this.isShowCartContent = this.inCart.length > 0 && !this.isShowCartContent;
@@ -48,7 +44,7 @@ export class CatalogComponent implements OnInit {
     let index = this.getProductCartIndex(item);
 
     index !== undefined && (this.inCart[index]['count'] += 1);
-    index === undefined && this.inCart.push({count: 0, product: item});
+    index === undefined && this.inCart.push({ count: 0, product: item });
   }
 
   private getProductCartIndex(product: any) {
@@ -67,16 +63,18 @@ export class CatalogComponent implements OnInit {
     return undefined;
   }
 
-   private setQueryParams() {
+  private setQueryParams() {
     const toggles = this.toggles;
-    const params = {};
+    const params: any = {};
+
+    let pressedButton: any;
 
     toggles?.forEach(toggle => {
-      // @ts-ignore
       toggle.value && (params[toggle.value] = toggle.isActive);
+      pressedButton = toggle.isActive ? toggle.value : pressedButton;
     });
 
-    this.router.navigate(['/catalog'], {queryParams: params});
+    this.router.navigate([ '/catalog' ], { queryParams: params });
   }
 
   public pressedFilterButton(buttonValue: any) {
@@ -90,8 +88,16 @@ export class CatalogComponent implements OnInit {
     this.setQueryParams();
   }
 
+  private setPressedButton() {
+    this.toggles?.forEach(toggle => {
+      toggle.isActive && (this.buttonPressed = toggle.value);
+    })
+  }
+
   public isVisible(elm: any) {
     let visible;
+
+    !this.buttonPressed && this.setPressedButton();
 
     switch (this.buttonPressed) {
       case 'discount':

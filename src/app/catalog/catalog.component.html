@@ -6,10 +6,10 @@
 
 <div class="catalog">
   <app-card
-    [routerLink]="['/product', item['id']]"
     class="item"
-    [style.display]="isVisible(item)"
     *ngFor="let item of products"
+    [style.display]="isVisible(item)"
+    [routerLink]="['/product', item['id']]"
     (addToCart)='addToCart($event, item)'
     [product]="item"
     [showButtons]="{add: true, remove: false}">
@@ -21,5 +21,8 @@
                   [products]="inCart">
 </app-cart-content>
 
-<app-toggle [toogless]="toggles" (toogleStatus)="pressedFilterButton($event)"></app-toggle>
+<app-toggle
+  [toogless]="toggles"
+  (toogleStatus)="pressedFilterButton($event)">
+</app-toggle>
 
