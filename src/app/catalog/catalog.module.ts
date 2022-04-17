@@ -7,6 +7,7 @@ import { CatalogComponent } from './catalog.component';
 import { ToggleModule } from '../toggle/toggle.module';
 import { CartContentModule } from '../cart-content/cart-content.module';
 import { CatalogRoutingModule } from './catalog-routing.module'
+import { CatalogServiceService } from "./catalog-service.service";
 
 
 @NgModule({
@@ -21,7 +22,9 @@ import { CatalogRoutingModule } from './catalog-routing.module'
     CatalogRoutingModule,
     ToggleModule
   ],
-  exports: [ CatalogComponent ]
+  exports: [ CatalogComponent ],
+  providers: [ CatalogServiceService ]
 })
 
-export class CatalogModule { }
+export class CatalogModule {
+}
