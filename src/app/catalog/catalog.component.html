@@ -8,7 +8,6 @@
   <app-card
     class="item"
     *ngFor="let item of products"
-    [style.display]="isVisible(item)"
     (addToCart)='addToCart($event, item)'
     [product]="item"
     [showButtons]="{add: true, remove: false}">
@@ -21,7 +20,7 @@
 </app-cart-content>
 
 <app-toggle
-  [toogless]="toggles"
-  (toogleStatus)="pressedFilterButton($event)">
+  [toggles]="toggles"
+  (toggleStatus)="pressedFilterButton($event)">
 </app-toggle>
 

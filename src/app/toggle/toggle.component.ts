@@ -8,17 +8,18 @@ import { toggle } from './model';
   templateUrl: './toggle.component.html',
   styleUrls: [ './toggle.component.scss' ]
 })
-export class ToggleComponent implements OnInit {
-  private _toogless: toggle[] | undefined;
 
-  @Input() set toogless(val: toggle[] | undefined) {
-    this._toogless = val;
+export class ToggleComponent implements OnInit {
+  private _toggles: toggle[] | undefined;
+
+  @Input() set toggles(val: toggle[] | undefined) {
+    this._toggles = val;
   };
 
-  @Output() toogleStatus = new EventEmitter()
+  @Output() toggleStatus = new EventEmitter()
 
-  public get toogless() {
-    return this._toogless;
+  public get toggles() {
+    return this._toggles;
   }
 
   constructor(private route: ActivatedRoute, private router: Router) {
@@ -29,12 +30,12 @@ export class ToggleComponent implements OnInit {
   }
 
   public buttonPressed(event: any, elm: any) {
-    elm.isActive ? null : this.toogleStatus.emit(event);
+    elm.isActive ? null : this.toggleStatus.emit(event);
   }
 
   private getToggleFromUrl() {
     const params = this.route.snapshot.queryParams;
-    const toggles = this._toogless;
+    const toggles = this._toggles;
     const newToggleList: any = [];
 
     let pressedButton: any;
@@ -55,7 +56,7 @@ export class ToggleComponent implements OnInit {
       });
     }
 
-    this.toogless = newToggleList.length ? newToggleList : this.toogless;
+    this.toggles = newToggleList.length ? newToggleList : this.toggles;
 
     Object.keys(params).length && this.router.navigate([ '/catalog' ], { queryParams: params });
     pressedButton && this.buttonPressed(pressedButton.value, pressedButton);

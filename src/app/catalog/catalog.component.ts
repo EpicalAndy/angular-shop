@@ -4,6 +4,7 @@ import { Router } from "@angular/router";
 import { products } from '../products.data'
 
 import { toggle } from '../toggle/model';
+import { CatalogService } from "./catalog.service";
 
 
 @Component({
@@ -12,29 +13,30 @@ import { toggle } from '../toggle/model';
   styleUrls: [ './catalog.component.scss' ]
 })
 export class CatalogComponent implements OnInit {
-  products: any[] = [];
+  // products: any[] = [];
   inCart: any[] = [];
   buttonPressed: string | undefined;
   productsInCart: any[] = [];
   toggles: toggle[] | undefined;
 
-  constructor(private router: Router) {
-    this.products = products;
+  constructor(private router: Router, private catalogService: CatalogService) {
     this.toggles = [
       { label: 'Показать все', value: 'all', isActive: true },
       { label: 'Со скидкой', value: 'discount', isActive: false },
       { label: 'В наличии', value: 'inStock', isActive: false },
       { label: 'Пустышка', value: '', isActive: false }
-    ]
+    ];
+
   }
 
   ngOnInit(): void {
-    this.setQueryParams();
+  }
+
+  public get products(): any[] {
+    return this.catalogService.getProducts(this.getActiveFilterName());
   }
 
   public isShowCartContent: boolean = false;
-
-  public showButtons = { add: false, remove: true };
 
   public showCartContent() {
     this.isShowCartContent = this.inCart.length > 0 && !this.isShowCartContent;
@@ -45,6 +47,16 @@ export class CatalogComponent implements OnInit {
 
     index !== undefined && (this.inCart[index]['count'] += 1);
     index === undefined && this.inCart.push({ count: 0, product: item });
+  }
+
+  /**
+   * @description возвращает value активного фильтра
+   * @private
+   */
+  private getActiveFilterName() {
+    return this.toggles?.find(item => {
+      return item.isActive;
+    })?.value;
   }
 
   private getProductCartIndex(product: any) {
@@ -71,6 +83,7 @@ export class CatalogComponent implements OnInit {
 
     toggles?.forEach(toggle => {
       toggle.value && (params[toggle.value] = toggle.isActive);
+
       pressedButton = toggle.isActive ? toggle.value : pressedButton;
     });
 
@@ -86,30 +99,5 @@ export class CatalogComponent implements OnInit {
     });
 
     this.setQueryParams();
-  }
-
-  private setPressedButton() {
-    this.toggles?.forEach(toggle => {
-      toggle.isActive && (this.buttonPressed = toggle.value);
-    })
-  }
-
-  public isVisible(elm: any) {
-    let visible;
-
-    !this.buttonPressed && this.setPressedButton();
-
-    switch (this.buttonPressed) {
-      case 'discount':
-        visible = elm?.discount === true ? 'block' : 'none';
-        break;
-      case 'inStock':
-        visible = elm?.count > 0 ? 'block' : 'none';
-        break
-      default:
-        visible = 'block';
-    }
-
-    return visible;
   }
 }
