@@ -1,18 +1,28 @@
-import { Component, Input, OnChanges, EventEmitter, OnInit, Output, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  EventEmitter,
+  OnInit,
+  Output,
+  SimpleChanges
+} from '@angular/core';
 
 import { constants } from './constants';
 
 @Component({
   selector: 'app-button',
-  template: `<button class="button"
-  [class.active]="isButtonActive"
-  (click)="buttonAction()"
-  [style.background]="buttonColor"
-  [style.width]="buttonSize"
-   [attr.disabled]="isButtonDisabled">
+  template: `
+    <button class="button"
+            [class.active]="isButtonActive"
+            (click)="buttonAction()"
+            [title]="title"
+            [style.background]="buttonColor"
+            [style.width]="buttonSize"
+            [attr.disabled]="isButtonDisabled">
       <span>{{ label }}</span>
     </button>`,
-  styleUrls: ['button.component.scss']
+  styleUrls: [ 'button.component.scss' ]
 })
 export class ButtonComponent implements OnInit {
   buttonColor: string;
@@ -23,18 +33,22 @@ export class ButtonComponent implements OnInit {
   @Input() set color(color: string) {
     this.buttonColor = constants?.color[color];
   }
+
   @Input() set size(size: string) {
     this.buttonSize = constants['size'][size];
   }
+
   @Input() set isActive(isActive: boolean) {
     this.isButtonActive = isActive || false;
   }
+
   @Input() set isDisabled(isDisabled: boolean) {
     this.isButtonDisabled = isDisabled ? '' : null;
   }
+
   @Input() label = 'Button';
   @Input() actionName: any;
-
+  @Input() tooltip: string | undefined;
   @Output() clicked = new EventEmitter();
 
   constructor() {
@@ -51,18 +65,15 @@ export class ButtonComponent implements OnInit {
 
   private buttonClicked = false;
 
-  public buttonHover() {
-    this.isButtonActive && true;
-  }
-
-  public buttonClick() {
-    alert('isActive!');
+  public get title() {
+    debugger
+    return this.tooltip || this.label || '';
   }
 
   public buttonAction() {
     this.buttonClicked = !this.buttonClicked;
 
     return this.actionName ? this.clicked.emit(this.actionName) :
-    this.clicked.emit(this.buttonClicked);
+      this.clicked.emit(this.buttonClicked);
   }
 }

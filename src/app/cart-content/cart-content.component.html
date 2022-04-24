@@ -1,10 +1,9 @@
-
 <div class="cart-content">
 
   <header>
     <app-button class="close-button"
-      (clicked)="closeCart()"
-      label="X">
+                (clicked)="closeCart()"
+                label="X">
     </app-button>
   </header>
 
@@ -20,12 +19,14 @@
 
   <footer>
     <span class="cart-sum">сумма: {{ currentSum | currency: 'RUR' }}</span>
-    <div class="buttons"><app-button (clicked)="clearCart()"
-      label="Очистить">
-    </app-button>
-    <app-button (clicked)="createOrder()"
-      label="Оформить">
-    </app-button></div>
+    <div class="buttons">
+      <app-button (clicked)="clearCart()"
+                  label="Очистить">
+      </app-button>
+      <app-button (clicked)="createOrder()"
+                  label="Оформить">
+      </app-button>
+    </div>
   </footer>
 
 </div>
