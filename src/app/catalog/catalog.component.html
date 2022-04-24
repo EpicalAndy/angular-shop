@@ -8,7 +8,7 @@
   <app-card
     class="item"
     *ngFor="let item of products"
-    (addToCart)='addToCart($event, item)'
+    (addToCart)='addToCart(item)'
     [product]="item"
     [showButtons]="{add: true, remove: false}">
   </app-card>
@@ -16,7 +16,7 @@
 
 <app-cart-content *ngIf="isShowCartContent"
                   (close)="showCartContent()"
-                  [products]="inCart">
+                  >
 </app-cart-content>
 
 <app-toggle

@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 
-import { products } from '../products.data'
-
 import { toggle } from '../toggle/model';
 import { CatalogService } from "./catalog.service";
+import { CartService } from "../cart/cart.service";
 
 
 @Component({
@@ -13,20 +12,20 @@ import { CatalogService } from "./catalog.service";
   styleUrls: [ './catalog.component.scss' ]
 })
 export class CatalogComponent implements OnInit {
-  // products: any[] = [];
   inCart: any[] = [];
   buttonPressed: string | undefined;
-  productsInCart: any[] = [];
   toggles: toggle[] | undefined;
 
-  constructor(private router: Router, private catalogService: CatalogService) {
+  constructor(private router: Router,
+              private catalogService: CatalogService,
+              private cartService: CartService) {
     this.toggles = [
       { label: 'Показать все', value: 'all', isActive: true },
       { label: 'Со скидкой', value: 'discount', isActive: false },
       { label: 'В наличии', value: 'inStock', isActive: false },
       { label: 'Пустышка', value: '', isActive: false }
     ];
-
+    this.inCart = this.cartService.getCart();
   }
 
   ngOnInit(): void {
@@ -39,14 +38,11 @@ export class CatalogComponent implements OnInit {
   public isShowCartContent: boolean = false;
 
   public showCartContent() {
-    this.isShowCartContent = this.inCart.length > 0 && !this.isShowCartContent;
+    this.isShowCartContent = this.cartService.getCount() > 0 && !this.isShowCartContent;
   }
 
-  public addToCart(isAddedToCart: any, item: any) {
-    let index = this.getProductCartIndex(item);
-
-    index !== undefined && (this.inCart[index]['count'] += 1);
-    index === undefined && this.inCart.push({ count: 0, product: item });
+  public addToCart(item: any) {
+    this.cartService.addProduct(item);
   }
 
   /**
@@ -57,22 +53,6 @@ export class CatalogComponent implements OnInit {
     return this.toggles?.find(item => {
       return item.isActive;
     })?.value;
-  }
-
-  private getProductCartIndex(product: any) {
-    const products = this.productsInCart;
-
-    let index = this.productsInCart.length;
-
-    while (index) {
-      index -= 1;
-
-      if (products[index]['id'] === product['id']) {
-        return index;
-      }
-    }
-
-    return undefined;
   }
 
   private setQueryParams() {

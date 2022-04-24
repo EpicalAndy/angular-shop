@@ -1,7 +1,7 @@
 
 <div class="cart-content">
-  <header>
 
+  <header>
     <app-button class="close-button"
       (clicked)="closeCart()"
       label="X">
@@ -13,20 +13,19 @@
       class="item"
       *ngFor="let item of productsData"
       [showButtons]="showButtons"
-      [product]="item['product']"
+      [product]="item"
       (removeFromCart)="removeFromCart(item)">
     </app-card>
   </div>
+
   <footer>
-    <span class="cart-sum">сумма: {{ curentSumm | currency: 'RUR' }}</span>
+    <span class="cart-sum">сумма: {{ currentSum | currency: 'RUR' }}</span>
     <div class="buttons"><app-button (clicked)="clearCart()"
       label="Очистить">
     </app-button>
     <app-button (clicked)="createOrder()"
       label="Оформить">
     </app-button></div>
-
   </footer>
-
 
 </div>

@@ -1,6 +1,5 @@
 import { Component, Input, OnInit, Output, EventEmitter, OnChanges } from '@angular/core';
 
-import { ButtonModule } from '../button/button.module';
 import {ActivatedRoute} from "@angular/router";
 
 @Component({
@@ -51,9 +50,8 @@ export class CardComponent implements OnInit {
     this.productId = this.route.snapshot.params['id']
   }
 
-  private isAddedToCart = false;
-
   ngOnInit(): void {
+
   }
 
   public get showAddButton() {

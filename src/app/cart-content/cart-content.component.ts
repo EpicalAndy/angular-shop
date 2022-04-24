@@ -1,7 +1,7 @@
-import { products } from './../products.data';
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
-
+import { CartService } from "../cart/cart.service";
+import { Product } from "../product-page/product.model";
 
 @Component({
   selector: 'app-cart-content',
@@ -9,20 +9,22 @@ import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./cart-content.component.scss']
 })
 export class CartContentComponent implements OnInit {
-
-  constructor() { }
-
-  @Input() products: any[] = [];
+  private products: Product[] = this.cartService.getCart();
 
   @Output() close = new EventEmitter();
 
   public showButtons = {add: false, remove: true};
 
+  constructor(private cartService: CartService) {
+
+  }
+
   ngOnInit(): void {
+
   }
 
   public get productsData() {
-    return this.products
+    return this.products;
   }
 
   public closeCart() {
@@ -30,29 +32,22 @@ export class CartContentComponent implements OnInit {
   }
 
   public removeFromCart(product: any) {
-    /* this.products = this.products.filter(item => {
-      return item['product']['id'] !== product['product']['id']
-
-    })*/
-
-    this.products.forEach((item, index) => {
-      if (item['product']['id'] === product['product']['id']) {
-        this.products.splice(index, 1);
-      }
-    });
+    this.cartService.removeProduct(product);
   }
 
   public clearCart() {
-    this.products.splice(0, this.products.length);
+    this.cartService.clearCart();
   }
 
   public createOrder() {
     this.clearCart();
+
+    this.closeCart();
   }
 
-  public get curentSumm() {
+  public get currentSum() {
     const val = 0;
 
-    return this.products.reduce((acc, product) => acc + product['product']['price'], val);
+    return this.products.reduce((acc, product) => acc + product['price'], val);
   }
 }
